@@ -46,13 +46,17 @@ export default function AboutPage() {
       </div>
 
       <Reveal>
-        <a
-          href="/resume.pdf"
-          className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 font-mono text-sm text-accent-foreground transition-opacity hover:opacity-90"
+        {/* Resume download intentionally disabled until the PDF is updated. */}
+        <button
+          type="button"
+          disabled
+          aria-disabled="true"
+          title="Resume is being updated"
+          className="mt-6 inline-flex cursor-not-allowed items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 font-mono text-sm text-muted opacity-60"
         >
           <FilePdf size={16} weight="regular" />
-          Download resume
-        </a>
+          Resume &mdash; updating
+        </button>
       </Reveal>
 
       <Reveal>

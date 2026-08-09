@@ -69,12 +69,16 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href="/resume.pdf"
-            className="rounded-md bg-accent px-4 py-2 font-mono text-sm text-accent-foreground transition-opacity hover:opacity-90"
+          {/* Resume download intentionally disabled until the PDF is updated. */}
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            title="Resume is being updated"
+            className="cursor-not-allowed rounded-md border border-border bg-surface px-4 py-2 font-mono text-sm text-muted opacity-60"
           >
-            Download resume
-          </a>
+            Resume — updating
+          </button>
           <Link
             href="/about"
             className="rounded-md border border-border bg-surface px-4 py-2 font-mono text-sm text-foreground transition-colors hover:border-accent hover:text-accent"
