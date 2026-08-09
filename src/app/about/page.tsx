@@ -38,10 +38,7 @@ export default function AboutPage() {
       <div className="mt-6 max-w-2xl space-y-4 text-sm leading-relaxed text-muted">
         <p>
           I&apos;m a mechanical engineering student at Georgia Tech, working
-          toward propulsion. I like taking a system all the way from a CAD
-          model through simulation to something that actually runs on a
-          bench &mdash; and I trust a ruler over a simulation until the two
-          agree.
+          toward propulsion.
         </p>
       </div>
 
