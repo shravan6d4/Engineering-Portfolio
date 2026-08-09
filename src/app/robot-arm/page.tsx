@@ -460,18 +460,42 @@ export default function RobotArmPage() {
               title="Closing the loop with data, not guesses"
               body={
                 <>
-                  Hand-eye calibration never converged below roughly{" "}
+                  Hand-eye calibration &mdash; the rigid transform between the
+                  camera and the wrist it&apos;s bolted to &mdash; never
+                  converged below roughly{" "}
                   <span className="font-mono text-foreground">
                     80&ndash;100&nbsp;mm
                   </span>{" "}
-                  of error against a 24&nbsp;mm ruler measurement &mdash;
-                  characterized precisely rather than papered over. The
-                  closed-loop visual servo path sidesteps it entirely: eleven
-                  real descent runs were logged as training data, a height
-                  model was fit from apparent brick area (after the more
-                  obvious pixel-rate signal turned out to run backwards), and
-                  a two-view triangulation survey now serves as an
-                  independent, hand-eye-free referee.
+                  of error against a 24&nbsp;mm ruler measurement, so it was
+                  characterized precisely rather than papered over.
+                  <br />
+                  <br />
+                  <strong className="font-medium text-foreground">
+                    That failure never touched inverse kinematics.
+                  </strong>{" "}
+                  IK still executes every move the arm makes: each descent
+                  step, sideways nudge, and survey swing is a MATLAB IK solve
+                  against the ruler-surveyed kinematic tree. What hand-eye
+                  would have bought is a different thing entirely &mdash; the
+                  ability to turn one pixel into an{" "}
+                  <em>absolute</em> base-frame coordinate and drive there in a
+                  single open-loop command. That path stays blocked, by
+                  choice.
+                  <br />
+                  <br />
+                  The closed-loop path only ever asks IK for{" "}
+                  <em>relative</em> steps: measure the pixel error, scale it
+                  by a gain probed live from the arm&apos;s own motion, solve
+                  IK for a target a few millimetres away, then re-measure. No
+                  camera-to-wrist transform appears anywhere in that loop,
+                  which is exactly why a wrong one can&apos;t poison it.
+                  Eleven real descent runs were logged as training data, a
+                  height model was fit from apparent brick area (after the
+                  more obvious pixel-rate signal turned out to run
+                  backwards), and a two-view triangulation survey now serves
+                  as an independent, hand-eye-free referee &mdash; currently
+                  disagreeing with the stored hand-eye transform by a median
+                  of 200&nbsp;mm.
                 </>
               }
             />
