@@ -611,10 +611,10 @@ export default function RobotArmPage() {
               Krish Vatsa
             </a>
             , who built and validated the OpenCV detection pipeline in
-            Python. I led the SolidWorks/Simscape kinematics, MATLAB IK,
-            hardware bring-up, calibration, and closed-loop control;
-            integrating the three systems together was the hardest and
-            longest part of the project.
+            Python. I led the SolidWorks/Simscape kinematics, MATLAB IK, and
+            hardware bring-up; calibration, fabrication, and closed-loop
+            control were done together. Integrating the three systems was the
+            hardest and longest part of the project.
           </p>
         </section>
       </Reveal>
