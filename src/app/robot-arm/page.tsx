@@ -51,6 +51,13 @@ const simGallery = [
 
 const buildGallery = [
   {
+    src: "/media/robot-arm/gallery/solidworks-assembly.jpg",
+    caption:
+      "SolidWorks — found the motor dimensions online and reverse-engineered a reference to build the arm around",
+    width: 1919,
+    height: 1079,
+  },
+  {
     src: "/media/robot-arm/gallery/slicer-preview.png",
     caption: "Creality slicer preview before printing arm segments",
     width: 622,
@@ -546,9 +553,12 @@ export default function RobotArmPage() {
         <section id="fabrication" className="mt-16">
           <SectionLabel n="07" title="Fabrication & build" Icon={Printer} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            With the kinematics confirmed, segments were sliced and printed on
-            a Creality Ender-class printer, then assembled and wired against
-            the SolidWorks reference on the bench.
+            The arm was modelled in SolidWorks around the servos themselves
+            &mdash; motor dimensions were sourced online and reverse-engineered
+            into a reference to build the housings and connectors against. With
+            the kinematics confirmed, segments were sliced and printed on a
+            Creality Ender-class printer, then assembled and wired against that
+            reference on the bench.
           </p>
           <div className="mt-6">
             <Gallery images={buildGallery} />
