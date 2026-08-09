@@ -64,8 +64,7 @@ export default function Home() {
           Shravan Kumar
         </h1>
         <p className="mt-5 max-w-xl text-base text-muted sm:text-lg">
-          I build systems end-to-end &mdash; from CAD and simulation through
-          to working hardware. Aiming for propulsion.
+          Aspiring propulsion engineer studying at Georgia Tech.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
