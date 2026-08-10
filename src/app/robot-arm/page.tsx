@@ -132,12 +132,13 @@ const pageSections = [
   { id: "results", label: "Results" },
   { id: "signals", label: "Signal flow" },
   { id: "pipeline", label: "Pipeline" },
-  { id: "story", label: "What broke" },
+  { id: "story", label: "How it came together" },
   { id: "accuracy", label: "Accuracy" },
   { id: "simulation", label: "Simulation" },
   { id: "fabrication", label: "Fabrication" },
   { id: "internals", label: "Under the hood" },
   { id: "literature", label: "Literature" },
+  { id: "takeaway", label: "Takeaway" },
 ];
 
 export default function RobotArmPage() {
@@ -157,10 +158,9 @@ export default function RobotArmPage() {
           5-DOF Autonomous Robotic Arm
         </h1>
         <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">
-          A vision-guided pick system taken end-to-end: modeled in SolidWorks,
-          imported into Simscape Multibody for inverse kinematics, driven by
-          OpenCV-based object detection over a closed servo control loop &mdash;
-          on real hardware, not just in simulation.
+          A robot built to pick up an object at any location in a given 3D
+          space &mdash; a 100% ground pick rate and an 80% elevated pick rate,
+          running off MATLAB and Python and driving to the serial bus driver.
         </p>
       </div>
 
@@ -407,105 +407,86 @@ export default function RobotArmPage() {
         </section>
       </Reveal>
 
-      {/* The story */}
+      {/* The story — in Shravan's own words */}
       <Reveal>
         <section id="story" className="mt-16">
-          <SectionLabel n="04" title="Four things that broke, and what they taught me" />
-          <div className="mt-8 space-y-4">
-            <Story
-              n="01"
-              title="The imported CAD model had the elbow backwards"
-              body={
-                <>
-                  The arm&apos;s IK solver ran fine in simulation, but a large
-                  move on hardware drove a joint into its limit. The instinct
-                  that caught it wasn&apos;t a debugger &mdash; it was a
-                  structural argument: J2 is the earliest joint in the chain,
-                  so it has to move the claw <em>more</em> than J3, not less.
-                  The imported model said otherwise. A jog and a ruler
-                  confirmed it: the model&apos;s elbow moment arm was inverted
-                  by more than{" "}
-                  <span className="font-mono text-foreground">2.17&times;</span>
-                  . Four independent statistical analyses had all pointed the
-                  wrong way; one physical jog settled it in thirty seconds.
-                </>
-              }
-            />
-            <Story
-              n="02"
-              title="Replaced the CAD kinematic chain with a ten-number ruler survey"
-              body={
-                <>
-                  Rather than patch the imported model, I rebuilt the
-                  arm&apos;s kinematics from five physically measured points
-                  &mdash; no curve-fitting, no CAD trust required. Held-out
-                  validation error dropped from{" "}
-                  <span className="font-mono text-foreground">73.1&nbsp;mm</span>{" "}
-                  to{" "}
-                  <span className="font-mono text-foreground">6.0&nbsp;mm</span>
-                  . It was ported into MATLAB behind a single flag and
-                  verified by independent replication before going live.
-                </>
-              }
-            />
-            <Story
-              n="03"
-              title="A hardware failure became a real safety system"
-              body={
-                <>
-                  A mid-move power cut once dropped the arm and drove a servo
-                  into overload. That turned into deliberate driver-level
-                  hardening: freeze-first e-stop (torque stays on, motion
-                  stops), live torque diagnostics, per-joint travel limits,
-                  and paced stepping so a wrong move is stoppable by hand
-                  before it does damage.
-                </>
-              }
-            />
-            <Story
-              n="04"
-              title="Closing the loop with data, not guesses"
-              body={
-                <>
-                  Hand-eye calibration &mdash; the rigid transform between the
-                  camera and the wrist it&apos;s bolted to &mdash; never
-                  converged below roughly{" "}
-                  <span className="font-mono text-foreground">
-                    80&ndash;100&nbsp;mm
-                  </span>{" "}
-                  of error against a 24&nbsp;mm ruler measurement, so it was
-                  characterized precisely rather than papered over.
-                  <br />
-                  <br />
-                  <strong className="font-medium text-foreground">
-                    That failure never touched inverse kinematics.
-                  </strong>{" "}
-                  IK still executes every move the arm makes: each descent
-                  step, sideways nudge, and survey swing is a MATLAB IK solve
-                  against the ruler-surveyed kinematic tree. What hand-eye
-                  would have bought is a different thing entirely &mdash; the
-                  ability to turn one pixel into an{" "}
-                  <em>absolute</em> base-frame coordinate and drive there in a
-                  single open-loop command. That path stays blocked, by
-                  choice.
-                  <br />
-                  <br />
-                  The closed-loop path only ever asks IK for{" "}
-                  <em>relative</em> steps: measure the pixel error, scale it
-                  by a gain probed live from the arm&apos;s own motion, solve
-                  IK for a target a few millimetres away, then re-measure. No
-                  camera-to-wrist transform appears anywhere in that loop,
-                  which is exactly why a wrong one can&apos;t poison it.
-                  Eleven real descent runs were logged as training data, a
-                  height model was fit from apparent brick area (after the
-                  more obvious pixel-rate signal turned out to run
-                  backwards), and a two-view triangulation survey now serves
-                  as an independent, hand-eye-free referee &mdash; currently
-                  disagreeing with the stored hand-eye transform by a median
-                  of 200&nbsp;mm.
-                </>
-              }
-            />
+          <SectionLabel n="04" title="How it came together" />
+          <div className="mt-6 max-w-3xl space-y-5 text-sm leading-relaxed text-muted">
+            <p>
+              The inspiration for this project stemmed from when I had seen
+              someone run a robot via machine learning and manual training in
+              tandem. As someone who was curious about MATLAB as well, I was
+              interested to see if I could capture the same results, running
+              purely off of model data and feedback loop simulation.
+            </p>
+            <p>
+              Starting with SolidWorks, I was able to mock up a basic model of a
+              5-DOF robot arm with stretched out lever points to include a
+              greater reach, while still utilizing a set of 6 STS3215 motors
+              from Amazon. While I hadn&apos;t bought the motors at this step, I
+              was able to find a rough model online where I was then able to
+              dimension out and reverse engineer a model part to use in my
+              assembly.
+            </p>
+            <p>
+              After learning how to set up an imported SolidWorks assembly into
+              MATLAB, and wiring the power for each joint through trial and
+              error in a bug-filled Simulink environment, I was able to run a
+              simple demo. From here I took myself through researching
+              MATLAB&apos;s built in inverse kinematics functions, and how to
+              utilize them for my model. The first framework I put together gave
+              me the bones, but it eventually led to a total of 7 different
+              bugs: scrambled joint mapping with &ldquo;phantom&rdquo; joints
+              driven from misinterpreted mates in SolidWorks, incorrect home
+              positions, double-counted joint offsets, incorrect joint
+              weighting, a misplaced end effector, incorrect limit setup, and a
+              From Workspace compile issue. After spending a month learning
+              MATLAB
+              and researching how people handled simulation for my kind of
+              scenario, I was able to eventually work through the issue, and get
+              a basic inverse kinematics model running through Cartesian
+              coordinates.
+            </p>
+            <p>
+              At this point, with my university starting back up in just over a
+              month, I made the decision to invite my friend Krish Vatsa, who
+              was already comfortable with robotics. He then handled the OpenCV
+              work we had outlined, while I began cleaning up the MATLAB.
+            </p>
+            <p>
+              Once parts had arrived, knowing that when printing PLA more
+              tolerances were needed, I printed a test part with just the fixture
+              points, and adjusted my model to get ready to print again. After
+              spending a day constructing, we hooked up a live server from
+              MATLAB straight into Python, and set up our serial bus driver.
+            </p>
+            <p>
+              From here, Sim and Reality began to diverge. The model&apos;s
+              numbers were inverted, so the solver was interpreting the
+              incorrect moment arm &mdash; one jog moved the claw
+              30&nbsp;mm where the model had predicted 13.8, off by a factor of
+              2.17. We instead decided to opt for a physical test at different
+              points, measuring joint offsets with a ruler.
+            </p>
+            <p>
+              Hand-eye calibration never came together either. Every solve we
+              ran put the camera 80 to 100&nbsp;mm from the wrist, against the
+              24&nbsp;mm we measured by hand, so rather than trust an absolute
+              camera-to-wrist transform we built the detection framework around
+              relative corrections instead. That included a self updating and
+              correcting vector-shortening model, at the reference of some
+              literature Krish was able to find.
+            </p>
+            <p>
+              After weeks of trial and error with systems breaking down, motors
+              jumping 180 degrees past limits, torque disabling, and adrenaline
+              filled power cuts, we brought our held-out error down from the CAD
+              model&apos;s 73.1&nbsp;mm to 6&nbsp;mm, which at the ground pick
+              level left us with still a 100% success rate. Working with a 2
+              pose system, we were able to achieve an 80% success rate off an
+              elevated surface, working with just 1 camera mounted to dictate
+              height.
+            </p>
           </div>
         </section>
       </Reveal>
@@ -631,6 +612,31 @@ export default function RobotArmPage() {
         </section>
       </Reveal>
 
+      {/* What I took away */}
+      <Reveal>
+        <section id="takeaway" className="mt-16">
+          <SectionLabel n="10" title="What I took away" />
+          <div className="mt-6 max-w-3xl space-y-5 text-sm leading-relaxed text-muted">
+            <p>
+              This project taught me a lot about the importance of not only
+              having the end to end vision early on, but to also be flexible to
+              work within that vision. Making decisions to scrap certain
+              features, and rewrite frameworks, especially in an era of AI
+              integration is becoming increasingly more important. I used Claude
+              Code to scaffold both the MATLAB framework and the detection
+              framework, and this project really taught us how to work
+              effectively with AI where it was needed, and work things from
+              scratch without the reliance of AI when we had to.
+            </p>
+            <p>
+              I&apos;m looking forward to continue my research in the
+              applications of simulation at my sophomore year at Georgia Tech,
+              and excited to see where my career will take me.
+            </p>
+          </div>
+        </section>
+      </Reveal>
+
       {/* Collaboration */}
       <Reveal>
         <section className="mt-16 rounded-lg border border-border bg-surface/40 p-5">
@@ -644,11 +650,11 @@ export default function RobotArmPage() {
             >
               Krish Vatsa
             </a>
-            , who built and validated the OpenCV detection pipeline in
-            Python. I led the SolidWorks/Simscape kinematics, MATLAB IK, and
-            hardware bring-up; calibration, fabrication, and closed-loop
-            control were done together. Integrating the three systems was the
-            hardest and longest part of the project.
+            , who handled the OpenCV work we had outlined and found the
+            literature behind the vector-shortening model, while I cleaned up
+            the MATLAB. Calibration, fabrication, and closed-loop control were
+            done together, and integrating the three systems was the hardest
+            and longest part of the project.
           </p>
         </section>
       </Reveal>
@@ -674,25 +680,6 @@ function SectionLabel({
   );
 }
 
-function Story({
-  n,
-  title,
-  body,
-}: {
-  n: string;
-  title: string;
-  body: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-lg border border-border bg-surface/30 p-5 transition-colors hover:border-accent/40 sm:grid sm:grid-cols-[3rem_1fr] sm:gap-3">
-      <p className="font-mono text-sm text-accent">{n}</p>
-      <div>
-        <h3 className="font-medium text-foreground">{title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted">{body}</p>
-      </div>
-    </div>
-  );
-}
 
 function SignalStep({
   n,
