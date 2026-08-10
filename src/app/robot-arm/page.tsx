@@ -22,9 +22,9 @@ import SectionNav from "@/components/SectionNav";
 import ErrorComparison from "@/components/ErrorComparison";
 
 export const metadata: Metadata = {
-  title: "5-DOF Robotic Arm — Shravan Kumar",
+  title: "5-DOF Robotic Arm | Shravan Kumar",
   description:
-    "Vision-guided 5-DOF robotic arm: SolidWorks → Simscape Multibody → OpenCV → closed-loop servo control.",
+    "A 5-DOF robot arm that picks up an object anywhere in a given 3D space, running off MATLAB, Python and a serial bus driver.",
 };
 
 const pipeline = [
@@ -37,13 +37,13 @@ const pipeline = [
 const simGallery = [
   {
     src: "/media/robot-arm/gallery/mesh-view-ik.png",
-    caption: "Mesh-view IK check — claw length 70.06mm, limits not yet defined",
+    caption: "Checking the IK in a mesh view. Claw length 70.06mm, no limits set yet",
     width: 745,
     height: 476,
   },
   {
     src: "/media/robot-arm/gallery/ik-trajectory-plot.png",
-    caption: "MATLAB — verifying inverse kinematics via mesh view",
+    caption: "Verifying the inverse kinematics in MATLAB",
     width: 738,
     height: 531,
   },
@@ -53,7 +53,7 @@ const buildGallery = [
   {
     src: "/media/robot-arm/gallery/solidworks-assembly.jpg",
     caption:
-      "SolidWorks — found the motor dimensions online and reverse-engineered a reference to build the arm around",
+      "SolidWorks. I found the motor dimensions online and reverse engineered a reference to build the arm around",
     width: 1919,
     height: 1079,
   },
@@ -94,37 +94,37 @@ const literature = [
     cite:
       "H. H. Chen, “A screw motion approach to uniqueness analysis of head-eye geometry,” CVPR, 1991.",
     contribution:
-      "Screw congruence. Because AX = XB makes A and B conjugate, every pose pair must agree on both rotation angle and screw pitch — but the tooling only ever tested angle. Adding the pitch test immediately caught four pose pairs that angle had passed cleanly, one of them with 0.06° of angle error hiding 115 mm of pitch error.",
+      "Screw congruence. AX = XB makes A and B conjugate, so every pose pair has to agree on rotation angle and on screw pitch, but our tooling was only ever testing the angle. Adding the pitch test caught four pose pairs that the angle test had passed cleanly, and one of them had 0.06° of angle error hiding 115 mm of pitch error.",
   },
   {
     cite:
       "Y. Sun and J. M. Hollerbach, “Observability index selection for robot calibration,” IEEE ICRA, 2008.",
     contribution:
-      "Observability indices O1–O4. Replaced condition number as the capture-quality gate, because condition number rates a capture of uniformly tiny rotations a perfect 1.0 — it cannot tell a well-conditioned capture from one that barely moved. Captures are now gated on O3.",
+      "Observability indices O1 to O4. We used these instead of condition number to gate capture quality, because condition number gives a capture of uniformly tiny rotations a perfect 1.0 and cannot tell a good capture from one where the arm barely moved. Captures are gated on O3 now.",
   },
   {
     cite:
       "F. C. Park and B. J. Martin, “Robot sensor calibration: solving AX = XB on the Euclidean group,” IEEE Transactions on Robotics and Automation, 10(5), 1994.",
     contribution:
-      "Closed-form AX = XB solution via orthogonal-Procrustes reduction for rotation, then least squares for translation. Let me solve from explicit motion pairs instead of OpenCV's absolute-pose interface — which is what made cross-board pooling possible, taking the solve from 11 constraints to the ~390 the data actually offered.",
+      "A closed form AX = XB solution, using an orthogonal Procrustes reduction for rotation and then least squares for translation. This let me solve from explicit motion pairs instead of going through OpenCV's absolute pose interface, which is what made pooling across boards possible and took the solve from 11 constraints up to the roughly 390 the data actually had in it.",
   },
   {
     cite:
       "V. V. Fedorov, Theory of Optimal Experiments, Academic Press, 1972 (Fedorov exchange algorithm).",
     contribution:
-      "D-optimal subset selection. Pose subsets are chosen by greedy seeding plus Fedorov exchange on log-determinant rather than on O3, since determinant criteria are the ones reported as correct under greedy selection. Measured effect: O3 rose 2.03 → 3.55 and conditioning went from failing to passing.",
+      "D-optimal subset selection. We pick pose subsets by greedy seeding plus Fedorov exchange on log determinant instead of on O3, since the determinant criteria are the ones reported as correct under greedy selection. O3 went from 2.03 to 3.55 and the conditioning went from failing to passing.",
   },
   {
     cite:
       "H. Zhuang, S. H. Motaghedi, and Z. S. Roth, “Robot calibration with planar constraints,” IEEE ICRA, 1999.",
     contribution:
-      "Planar-constraint identifiability. A single plane leaves the identification matrix rank deficient — three mutually non-parallel planes are the minimum for identification. This is why the table-plane tool was deliberately scoped to refute a hypothesis rather than claim to identify parameters from one flat surface.",
+      "Planar constraint identifiability. One plane leaves the identification matrix rank deficient, and you need three planes that are not parallel to each other before you can identify anything. That is why we scoped the table plane tool to refute a hypothesis on purpose, instead of claiming it could identify parameters off one flat surface.",
   },
   {
     cite:
       "R. Y. Tsai and R. K. Lenz, “A new technique for fully autonomous and efficient 3D robotics hand/eye calibration,” IEEE Transactions on Robotics and Automation, 5(3), 1989.",
     contribution:
-      "The other hand-eye method available in OpenCV. Solving with both TSAI and PARK and cross-checking them is what exposed that the original agreement gate compared only translation — so two methods could agree on the same badly-wrong orientation and still report “ok.”",
+      "The other hand-eye method OpenCV gives you. Solving with both TSAI and PARK and cross checking them is what exposed that our original agreement gate was only comparing translation, which meant both methods could agree on the same badly wrong orientation and still come back reporting ok.",
   },
 ];
 
@@ -152,14 +152,14 @@ export default function RobotArmPage() {
           className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
         />
         <p className="font-mono text-xs uppercase tracking-widest text-accent">
-          Project 01 &mdash; June&ndash;August 2026
+          Project 01 &middot; June to August 2026
         </p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
           5-DOF Autonomous Robotic Arm
         </h1>
         <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">
           A robot built to pick up an object at any location in a given 3D
-          space &mdash; a 100% ground pick rate and an 80% elevated pick rate,
+          space, with a 100% ground pick rate and an 80% elevated pick rate,
           running off MATLAB and Python and driving to the serial bus driver.
         </p>
       </div>
@@ -167,9 +167,9 @@ export default function RobotArmPage() {
       <Reveal className="mt-8">
         <StatCallout
           stats={[
-            { value: "100%", label: "Success — ground pick", tone: "positive" },
-            { value: "80%", label: "Success — off-height (8/10)" },
-            { value: "3D", label: "Picks anywhere in the reachable volume" },
+            { value: "100%", label: "Ground pick success", tone: "positive" },
+            { value: "80%", label: "Elevated pick success (8/10)" },
+            { value: "3D", label: "Picks anywhere it can reach" },
             { value: "5", label: "Degrees of freedom" },
           ]}
         />
@@ -193,14 +193,13 @@ export default function RobotArmPage() {
         <section id="results" className="mt-16">
           <SectionLabel n="01" title="Results" />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            The three clips below are sample points, not the limit of what the
-            arm can reach &mdash; the two-pose system resolves a target
-            anywhere inside the arm&apos;s reachable volume, at any height,
-            without being told how high the object sits. Off-height picks
-            depend on that solved depth rather than the ground case&apos;s
-            known table plane, which is what accounts for the gap between
-            100% and 80%. Each trial below pairs the physical arm with the
-            OpenCV detection view captured from the same run.
+            The three clips below are sample points and not the limit of where
+            the arm can reach. The two pose system solves for a target anywhere
+            inside the arm&apos;s reachable volume, at any height, without
+            being told how high the object is sitting. Off-height picks lean on
+            that solved depth instead of a known table plane, and that is where
+            the gap between 100% and 80% comes from. Each trial pairs the
+            physical arm with the OpenCV detection view from the same run.
           </p>
           <div className="mt-6 space-y-4">
             <HeightDemo
@@ -225,15 +224,15 @@ export default function RobotArmPage() {
             />
           </div>
           <p className="mt-3 font-mono text-[11px] text-muted">
-            Descent moves are deliberately paced &mdash; slow jogs are a
-            safety margin against an encoder-seam runaway, and the camera
-            needs a near-stationary frame for OpenCV to resolve the brick
-            without motion blur. Clips are sped up 2.5&times; for viewing.
+            The descent moves in slow jogs on purpose. It gave us a safety
+            margin against an encoder seam runaway, and the camera needed a
+            close to stationary frame for OpenCV to resolve the brick without
+            motion blur. Clips are sped up 2.5&times; for viewing.
           </p>
         </section>
       </Reveal>
 
-      {/* Signal flow — what actually happens per descent step */}
+      {/* Signal flow: what actually happens per descent step */}
       <Reveal>
         <section id="signals" className="mt-16">
           <SectionLabel
@@ -242,85 +241,85 @@ export default function RobotArmPage() {
             Icon={Broadcast}
           />
           <p className="mt-2 max-w-3xl text-sm text-muted">
-            The descent isn&apos;t one command &mdash; it&apos;s a loop that
-            re-measures, re-solves, and re-commands roughly every eight
-            millimetres of travel. Here is the chain that runs each time.
+            The descent is not one command. It is a loop that re-measures,
+            re-solves and re-commands about every eight millimetres of travel,
+            and this is the chain that runs each time.
           </p>
 
           <div className="mt-6 space-y-3">
             <SignalStep
               n="01"
-              title="Camera resolves the brick and shortens the error vector"
+              title="The camera finds the brick and we shorten the error vector"
               body={
                 <>
                   OpenCV segments the brick by colour and scores its studs and
-                  contour geometry, returning a pixel centroid. The loop
+                  contour geometry, which gives us a pixel centroid. The loop
                   subtracts that from the aim point to get a 2-D pixel error
-                  vector &mdash; and then deliberately{" "}
+                  vector, and then{" "}
                   <strong className="font-medium text-foreground">
                     shortens it
-                  </strong>
-                  . Rather than commanding the full correction at once, it
-                  scales the vector down to a small step, because a single
-                  large lunge would overshoot: the camera rides on the wrist,
-                  so any move the arm makes changes the very measurement the
-                  correction was computed from. Shortening the vector keeps
-                  the loop convergent instead of oscillating &mdash; each step
-                  moves a fraction of the way, then re-measures against a
-                  fresh frame.
+                  </strong>{" "}
+                  on purpose. If we commanded the whole correction at once it
+                  would overshoot, because the camera is mounted on the wrist,
+                  so any move the arm makes changes the same measurement the
+                  correction came from. Scaling the vector down to a small step
+                  keeps the loop converging instead of oscillating, since every
+                  step only moves part of the way and then measures again
+                  against a fresh frame.
                 </>
               }
             />
             <SignalStep
               n="02"
-              title="The pixel step is converted into a base-frame Cartesian target"
+              title="The pixel step becomes a Cartesian target in the base frame"
               body={
                 <>
-                  A probe measures the loop&apos;s own gain empirically
-                  &mdash; jog a known distance, watch how many pixels the
-                  brick moved &mdash; giving a live mm-per-pixel scale for the
-                  current posture. That converts the shortened pixel vector
-                  into millimetres along the arm&apos;s real reach and
-                  tangential axes (measured by perturbing a pitch joint, not
-                  inferred from the CAD frame). The result is a target point
-                  in the base frame, one small step from where the claw is
-                  now.
+                  A probe measures the loop&apos;s own gain by jogging a known
+                  distance and watching how many pixels the brick moved, which
+                  gives us a live mm per pixel scale for whatever posture the
+                  arm is in. That turns the shortened pixel vector into
+                  millimetres along the arm&apos;s real reach and tangential
+                  axes, which we found by perturbing a pitch joint instead of
+                  reading them off the CAD frame. What comes out is a target
+                  point in the base frame, one small step from where the claw
+                  already is.
                 </>
               }
             />
             <SignalStep
               n="03"
-              title="Python hands the target to MATLAB, which solves inverse kinematics"
+              title="Python hands the target to MATLAB and MATLAB solves the inverse kinematics"
               body={
                 <>
-                  The Cartesian target crosses a local TCP socket to a MATLAB
-                  server holding the arm&apos;s rigid-body tree. MATLAB runs{" "}
+                  The Cartesian target goes over a local TCP socket to a MATLAB
+                  server holding the arm&apos;s rigid body tree. MATLAB runs{" "}
                   <span className="font-mono text-foreground">
                     inverseKinematics
                   </span>{" "}
-                  seeded from the arm&apos;s <em>current</em> joint angles, so
-                  it converges on the nearest solution rather than some other
-                  legal posture across the workspace. Because a 5-DOF arm has
-                  redundant freedom against a 3-DOF position target, the solve
-                  is constrained: wrist roll and (on radial moves) base yaw
-                  are held, and the returned angles are checked against
-                  measured per-joint travel limits and a Cartesian floor guard
-                  before anything moves.
+                  seeded from the arm&apos;s current joint angles so it settles
+                  on the nearest solution instead of some other legal posture
+                  somewhere else in the workspace. A 5-DOF arm has redundant
+                  freedom against a 3-DOF position target, so we constrain the
+                  solve, holding wrist roll and holding base yaw on radial
+                  moves. The angles that come back get checked against measured
+                  per joint travel limits and a Cartesian floor guard before
+                  anything moves.
                 </>
               }
             />
             <SignalStep
               n="04"
-              title="Joint angles become paced servo commands"
+              title="Joint angles turn into paced servo commands"
               body={
                 <>
-                  Angles are converted to raw encoder ticks through each
-                  joint&apos;s calibrated scale and direction sign, then
-                  issued over the serial bus in sub-cap hops with a rest
-                  between them. Position is read back after each hop rather
-                  than assumed, so a stalled or refused joint ends the move
-                  instead of being pushed through &mdash; and the pause is
-                  what keeps a wrong move stoppable by hand.
+                  The angles convert to raw encoder ticks through each
+                  joint&apos;s calibrated scale and direction sign, then go out
+                  over the serial bus in hops small enough to stay under our
+                  travel cap, with a rest in between. We read position back
+                  after every hop instead of assuming it arrived, so a stalled
+                  or refused joint ends the move instead of getting pushed
+                  through, and that pause is what let us stop a wrong move by
+                  hand.
                 </>
               }
             />
@@ -330,52 +329,52 @@ export default function RobotArmPage() {
           <div className="mt-8 rounded-xl border border-accent/30 bg-accent/[0.04] p-5">
             <h3 className="flex items-center gap-2 font-medium text-foreground">
               <Cube size={18} weight="regular" className="text-accent" />
-              The two-pose system: why height doesn&apos;t have to be known
+              The 2 pose system, and why we never have to know the height
             </h3>
             <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted">
               <p>
-                One camera looking at one frame cannot recover depth. A single
-                image only gives a <em>ray</em> pointing from the lens toward
-                the brick &mdash; every point along that ray projects to the
-                same pixel. The usual workaround is to assume the object sits
-                on a known plane (the tabletop) and intersect the ray with it.
-                That works on the ground and fails the moment the brick is on
-                top of something, because the claw then drives to where the
-                table would have been.
+                One camera looking at one frame cannot get depth. A single image
+                only gives you a <em>ray</em> pointing from the lens toward the
+                brick, and every point along that ray lands on the same pixel.
+                The usual way around it is to assume the object is sitting on a
+                known plane, normally the tabletop, and intersect the ray with
+                that plane. It works on the ground and falls apart the moment
+                the brick is on top of something, because the claw drives to
+                where the table would have been.
               </p>
               <p>
-                The two-pose system removes that assumption. The arm captures
+                The 2 pose system takes that assumption out. The arm captures
                 the brick from one pose, swings the base tangentially to a
-                second pose a known baseline apart, and captures again. Two
-                rays from two known camera positions{" "}
+                second pose a known distance away, and captures again. Two rays
+                from two known camera positions{" "}
                 <strong className="font-medium text-foreground">
-                  intersect at a single point in space
-                </strong>{" "}
-                &mdash; that intersection is the brick&apos;s true 3-D
-                position, height included. The arm has effectively become its
-                own stereo pair, using its own forward kinematics to know how
-                far the two viewpoints are apart.
+                  intersect at one point in space
+                </strong>
+                , and that intersection is the brick&apos;s actual 3-D position
+                with the height included. The arm ends up being its own stereo
+                pair, using its own forward kinematics to know how far apart the
+                two viewpoints are.
               </p>
               <p>
-                Two details make it work rather than merely sound right. The
-                move has to be <em>tangential</em>, because parallax needs
-                translation across the line of sight &mdash; and on this arm
-                the base yaw is the only joint that provides it, since the
-                three parallel pitch joints move the camera mostly along its
-                own view. And the baseline has to be verified, not assumed:
-                near-parallel rays amplify a pixel of noise into tens of
-                millimetres of depth error, so the run reads the joint and the
-                FK tip before and after each leg and refuses to triangulate if
-                the arm didn&apos;t actually travel far enough.
+                Two details had to be right for this to actually work. The move
+                has to be <em>tangential</em>, because parallax needs
+                translation across the line of sight, and on this arm the base
+                yaw is the only joint that gives us that. The three parallel
+                pitch joints mostly move the camera along its own view, so they
+                are no help here. The baseline also has to be verified instead
+                of assumed, because near parallel rays turn one pixel of noise
+                into tens of millimetres of depth error. The run reads the joint
+                and the FK tip before and after each leg, and refuses to
+                triangulate if the arm did not actually travel far enough.
               </p>
               <p className="border-t border-accent/20 pt-3">
                 <strong className="font-medium text-foreground">
-                  The consequence:
+                  What that buys us:
                 </strong>{" "}
-                the pick target is solved rather than assumed, so the arm can
-                grasp an object resting anywhere inside its reachable volume
-                &mdash; on the table, on a book, on a raised block &mdash;
-                without being told in advance how high it is.
+                the pick target gets solved instead of assumed, so the arm can
+                grab an object sitting anywhere inside its reachable volume, on
+                the table, on a book, or on a raised block, without being told
+                ahead of time how high it is.
               </p>
             </div>
           </div>
@@ -407,7 +406,7 @@ export default function RobotArmPage() {
         </section>
       </Reveal>
 
-      {/* The story — in Shravan's own words */}
+      {/* The story, in Shravan's own words */}
       <Reveal>
         <section id="story" className="mt-16">
           <SectionLabel n="04" title="How it came together" />
@@ -463,17 +462,16 @@ export default function RobotArmPage() {
             <p>
               From here, Sim and Reality began to diverge. The model&apos;s
               numbers were inverted, so the solver was interpreting the
-              incorrect moment arm &mdash; one jog moved the claw
-              30&nbsp;mm where the model had predicted 13.8, off by a factor of
-              2.17. We instead decided to opt for a physical test at different
+              incorrect moment arm. One jog moved the claw 30&nbsp;mm where
+              the model had predicted 13.8, off by a factor of 2.17. We instead decided to opt for a physical test at different
               points, measuring joint offsets with a ruler.
             </p>
             <p>
               Hand-eye calibration never came together either. Every solve we
               ran put the camera 80 to 100&nbsp;mm from the wrist, against the
-              24&nbsp;mm we measured by hand, so rather than trust an absolute
-              camera-to-wrist transform we built the detection framework around
-              relative corrections instead. That included a self updating and
+              24&nbsp;mm we measured by hand. We stopped trying to trust an
+              absolute camera-to-wrist transform and built the detection
+              framework around relative corrections instead. That included a self updating and
               correcting vector-shortening model, at the reference of some
               literature Krish was able to find.
             </p>
@@ -491,13 +489,13 @@ export default function RobotArmPage() {
         </section>
       </Reveal>
 
-      {/* Accuracy — the headline result, visualized */}
+      {/* Accuracy: the headline result, visualized */}
       <Reveal>
         <section id="accuracy" className="mt-16">
           <SectionLabel n="05" title="What the rebuild bought" />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            The single most consequential change in the project, measured
-            against touch points the model was never fitted to.
+            This was the biggest single change we made, measured against touch
+            points the model was never fitted to in the first place.
           </p>
           <div className="mt-6 max-w-2xl">
             <ErrorComparison />
@@ -510,17 +508,17 @@ export default function RobotArmPage() {
         <section id="simulation" className="mt-16">
           <SectionLabel n="06" title="Simulation validation" />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Before any hardware was involved, the Simscape Multibody model
-            (imported from the SolidWorks assembly) validated inverse
-            kinematics against target poses in simulation &mdash; solved in
-            MATLAB and checked against a mesh view of the arm before a single
-            part was printed.
+            Before any hardware was involved, I used the Simscape Multibody
+            model imported from the SolidWorks assembly to check the inverse
+            kinematics against target poses in simulation. Everything was
+            solved in MATLAB and checked against a mesh view of the arm before
+            a single part got printed.
           </p>
           <div className="mt-4 max-w-xl">
             <VideoSlot
               src="/media/robot-arm/simscape-demo.mp4"
               poster="/media/posters/simscape.jpg"
-              label="Simscape Multibody — early IK validation"
+              label="Simscape Multibody, early IK validation"
             />
           </div>
           <div className="mt-4">
@@ -534,11 +532,11 @@ export default function RobotArmPage() {
         <section id="fabrication" className="mt-16">
           <SectionLabel n="07" title="Fabrication & build" Icon={Printer} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            The arm was modelled in SolidWorks around the servos themselves
-            &mdash; motor dimensions were sourced online and reverse-engineered
-            into a reference to build the housings and connectors against. With
-            the kinematics confirmed, segments were sliced and printed on a
-            Creality Ender-class printer, then assembled and wired against that
+            I modelled the arm in SolidWorks around the servos themselves. I
+            found the motor dimensions online and reverse engineered them into a
+            reference to build the housings and connectors against. Once the
+            kinematics checked out, I sliced and printed the segments on a
+            Creality Ender, then we assembled and wired everything against that
             reference on the bench.
           </p>
           <div className="mt-6">
@@ -554,15 +552,15 @@ export default function RobotArmPage() {
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             <UnderTheHoodCard
               title="Safety"
-              body="Software freeze as the first-resort stop (torque held, motion halted) ahead of a power cut; per-joint travel limits measured directly rather than assumed; paced stepping with a rest between hops so a bad move can be caught by hand."
+              body="A software freeze is the first thing we reach for instead of the power cut, since it holds torque and stops motion without dropping the arm. Travel limits are measured per joint instead of assumed, and the paced stepping leaves a rest between hops so we can catch a bad move by hand."
             />
             <UnderTheHoodCard
               title="Closed-loop control"
-              body="Null-space joints (wrist roll, base yaw during radial moves) are locked out of the solver's redundant freedom; a pan-budget formula lets tangential base-yaw moves spend the angle their geometry actually requires while still capping wasteful radial ones."
+              body="Wrist roll, and base yaw on radial moves, get locked out of the freedom the solver would otherwise spend on them. A pan budget lets tangential base yaw moves use the angle their geometry actually needs, while still capping the radial ones that were only wasting it."
             />
             <UnderTheHoodCard
               title="Frame handling"
-              body="The Simscape import's base frame is upside-down relative to the physical robot — handled once, at the single MATLAB client seam, so the rest of the codebase speaks the physical frame without thinking about it."
+              body="The Simscape import gives you a base frame that is upside down compared to the physical robot. We handle that once at the MATLAB client seam so the rest of the code only ever speaks the physical frame."
             />
           </div>
           <a
@@ -583,10 +581,9 @@ export default function RobotArmPage() {
         <section id="literature" className="mt-16">
           <SectionLabel n="09" title="Literature referenced" Icon={Books} />
           <p className="mt-2 max-w-3xl text-sm text-muted">
-            The hand-eye calibration and kinematic-identification work
-            wasn&apos;t improvised &mdash; each diagnostic was built from an
-            established result. What follows is what I read and what it
-            changed in the code.
+            We did not improvise the hand-eye calibration or the kinematic
+            identification work. Each diagnostic came out of an established
+            result, so here is what we read and what it changed in the code.
           </p>
           <ol className="mt-6 space-y-3">
             {literature.map((ref, i) => (

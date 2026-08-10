@@ -31,7 +31,7 @@ export default function VideoSlot({ src, poster, label }: VideoSlotProps) {
           />
         </svg>
         <p className="px-4 font-mono text-xs text-muted">
-          Footage coming soon &mdash; {label}
+          Footage coming soon: {label}
         </p>
       </div>
     );

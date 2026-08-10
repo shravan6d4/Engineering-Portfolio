@@ -58,7 +58,7 @@ export default function ErrorComparison() {
       className="rounded-lg border border-border bg-surface/40 p-5"
     >
       <p className="font-mono text-xs uppercase tracking-widest text-muted">
-        Forward-kinematics accuracy &mdash; validated on held-out touch points
+        Forward kinematics accuracy, checked on held-out touch points
       </p>
       <div className="mt-5 space-y-4">
         {rows.map((row, i) => (
@@ -91,9 +91,9 @@ export default function ErrorComparison() {
         ))}
       </div>
       <p className="mt-5 border-t border-border pt-4 text-sm text-muted">
-        A <span className="font-mono text-foreground">12&times;</span> reduction
-        in positioning error &mdash; from ten ruler measurements, with no
-        curve-fitting and no reliance on the CAD geometry.
+        That is a <span className="font-mono text-foreground">12&times;</span>{" "}
+        reduction in positioning error, and it came out of ten ruler
+        measurements with no curve fitting and no reliance on the CAD geometry.
       </p>
     </div>
   );

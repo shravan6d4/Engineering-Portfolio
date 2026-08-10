@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="mt-24 border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p className="font-mono text-xs text-muted">
-          Shravan Kumar &mdash; Mechanical Engineering, Georgia Tech
+          Shravan Kumar &middot; Mechanical Engineering, Georgia Tech
         </p>
         <ul className="flex flex-wrap gap-x-6 gap-y-2">
           {links.map((link) => (
