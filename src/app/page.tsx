@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Shravan Kumar — Mechanical Engineering Portfolio",
+  title: "Shravan Kumar | Mechanical Engineering Portfolio",
 };
 
 const projects = [
@@ -13,7 +13,7 @@ const projects = [
     tag: "Project 01",
     title: "5-DOF Autonomous Robotic Arm",
     blurb:
-      "SolidWorks → Simscape Multibody → OpenCV → closed-loop servo control. 100% ground-pick success on real hardware.",
+      "SolidWorks into Simscape Multibody, OpenCV detection, and closed-loop servo control. 100% ground pick success on real hardware.",
     stats: ["100% ground pick", "SolidWorks → hardware"],
     cover: "/media/robot-arm/cover.jpg",
     coverAlt:
@@ -24,9 +24,9 @@ const projects = [
   {
     href: "/v6-engine",
     tag: "Project 02",
-    title: "Mitsubishi 6G72 V6 — CAD Assembly",
+    title: "Mitsubishi 6G72 V6 CAD Assembly",
     blurb:
-      "Reverse-engineered a full V6 SOHC engine in SolidWorks from part drawings — pistons, crankshaft, camshaft, and a fully mated large-scale assembly.",
+      "A full V6 SOHC engine reverse engineered in SolidWorks from part drawings. Pistons, crankshaft, camshaft, and a large assembly that all mates together.",
     stats: ["Full assembly", "Motion study validated"],
     cover: "/media/v6-engine/gallery/timing-belt-cutaway.jpg",
     coverAlt:
@@ -37,9 +37,9 @@ const projects = [
   {
     href: "/fusion-paper",
     tag: "Project 03",
-    title: "Nuclear Fusion — Research Paper",
+    title: "Nuclear Fusion Research Paper",
     blurb:
-      "A quantitative survey of magnetic and inertial confinement fusion, co-authored with Ryan Kang.",
+      "A quantitative look at magnetic and inertial confinement fusion, written with Ryan Kang.",
     stats: ["34 sources", "Co-authored"],
     cover: "/media/fusion/paper-page.jpg",
     coverAlt:
@@ -58,7 +58,7 @@ export default function Home() {
           className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-accent/10 blur-3xl"
         />
         <p className="font-mono text-xs uppercase tracking-widest text-accent">
-          Mechanical Engineering &mdash; Georgia Tech
+          Mechanical Engineering &middot; Georgia Tech
         </p>
         <h1 className="mt-3 max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
           Shravan Kumar
@@ -76,7 +76,7 @@ export default function Home() {
             title="Resume is being updated"
             className="cursor-not-allowed rounded-md border border-border bg-surface px-4 py-2 font-mono text-sm text-muted opacity-60"
           >
-            Resume — updating
+            Resume, updating
           </button>
           <Link
             href="/about"

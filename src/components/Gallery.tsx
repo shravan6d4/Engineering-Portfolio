@@ -60,7 +60,7 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
               />
             </div>
             <p className="border-t border-border bg-surface px-2.5 py-1.5 font-mono text-[11px] text-muted">
-              {img.reference ? "Reference — " : ""}
+              {img.reference ? "Reference: " : ""}
               {img.caption}
             </p>
           </button>
@@ -129,7 +129,7 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
               className="max-h-[80vh] w-auto rounded-lg border border-border object-contain"
             />
             <p className="mt-3 text-center font-mono text-xs text-muted">
-              {images[openIndex].reference ? "Reference — " : ""}
+              {images[openIndex].reference ? "Reference: " : ""}
               {images[openIndex].caption}{" "}
               <span className="text-foreground/50">
                 {openIndex + 1}/{images.length}

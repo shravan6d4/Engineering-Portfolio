@@ -3,7 +3,7 @@ import { FilePdf, EnvelopeSimple, LinkedinLogo, GithubLogo } from "@phosphor-ico
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "About — Shravan Kumar",
+  title: "About | Shravan Kumar",
 };
 
 const coursework = [
@@ -52,7 +52,7 @@ export default function AboutPage() {
           className="mt-6 inline-flex cursor-not-allowed items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 font-mono text-sm text-muted opacity-60"
         >
           <FilePdf size={16} weight="regular" />
-          Resume &mdash; updating
+          Resume, updating
         </button>
       </Reveal>
 

@@ -18,7 +18,7 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Shravan Kumar — Mechanical Engineering Portfolio",
+  title: "Shravan Kumar | Mechanical Engineering Portfolio",
   description:
     "Mechanical engineering portfolio: 5-DOF autonomous robotic arm, V6 engine CAD assembly, and nuclear fusion research.",
 };

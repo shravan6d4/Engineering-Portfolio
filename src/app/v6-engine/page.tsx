@@ -10,9 +10,9 @@ import PowerFlow from "@/components/PowerFlow";
 import SectionNav from "@/components/SectionNav";
 
 export const metadata: Metadata = {
-  title: "Mitsubishi 6G72 V6 — Shravan Kumar",
+  title: "Mitsubishi 6G72 V6 | Shravan Kumar",
   description:
-    "Reverse-engineered Mitsubishi 6G72 V6 SOHC engine, fully assembled and motion-validated in SolidWorks.",
+    "A Mitsubishi 6G72 V6 SOHC engine reverse engineered in SolidWorks, fully assembled and checked with a motion study.",
 };
 
 const gallery = [
@@ -36,7 +36,7 @@ const gallery = [
   },
   {
     src: "/media/v6-engine/gallery/intake-manifold-drawing.jpg",
-    caption: "Intake manifold — dimensioned 2D drawing",
+    caption: "Intake manifold, dimensioned 2D drawing",
     width: 857,
     height: 554,
   },
@@ -103,16 +103,17 @@ export default function V6EnginePage() {
             className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
           />
           <p className="font-mono text-xs uppercase tracking-widest text-accent">
-            Project 02 &mdash; January&ndash;May 2026
+            Project 02 &middot; January to May 2026
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
-            Mitsubishi 6G72 V6 &mdash; CAD Assembly
+            Mitsubishi 6G72 V6 CAD Assembly
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">
-            A fully mated, motion-validated V6 SOHC engine reverse-engineered
-            in SolidWorks from part drawings and reference dimensions &mdash;
-            crankshaft, camshaft, valve train, and a 20+ part accessory drive,
-            modeled and assembled from scratch.
+            A V6 SOHC engine I reverse engineered in SolidWorks from part
+            drawings and reference dimensions. The crankshaft, camshaft, valve
+            train and a 20+ part accessory drive were all modelled and
+            assembled from scratch, and the whole thing mates together and
+            moves.
           </p>
         </div>
         <div className="relative overflow-hidden rounded-xl border border-border bg-surface/40">
@@ -125,7 +126,7 @@ export default function V6EnginePage() {
             className="w-full object-contain"
           />
           <p className="border-t border-border px-3 py-2 font-mono text-[11px] text-muted">
-            Cutaway &mdash; pistons, crank, timing belt, both cam banks
+            Cutaway view of the pistons, crank, timing belt and both cam banks
           </p>
         </div>
       </div>
@@ -160,42 +161,43 @@ export default function V6EnginePage() {
           <SectionLabel n="01" title="Why this project" />
           <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted">
             <p>
-              I wanted deliberate practice at two things a robot-arm-scale
-              project doesn&apos;t exercise: reading real part drawings and
-              reference dimensions instead of designing from a blank sketch,
-              and managing a large assembly where a single mistake in one
-              subsystem (a bore diameter, a journal offset) breaks how a
+              I wanted practice at two things the robot arm never made me do.
+              The first was working off real part drawings and reference
+              dimensions instead of designing from a blank sketch. The second
+              was managing an assembly big enough that one mistake in one
+              subsystem, a bore diameter or a journal offset, breaks the way a
               dozen other parts mate.
             </p>
             <p>
-              The 6G72 was the target: a real Mitsubishi V6 SOHC engine,
-              reverse-engineered feature by feature &mdash; cylinder block,
-              crankshaft and connecting rods, camshafts and the full valve
-              train (rocker arms, followers, springs), timing belt and cam
-              gears, intake and exhaust manifolds. Every dimension was pulled
-              from reference measurements and constrained with real
-              geometric mates, not eyeballed.
+              The 6G72 was the target, a real Mitsubishi V6 SOHC engine that I
+              worked through feature by feature. That meant the cylinder block,
+              the crankshaft and connecting rods, the camshafts and the full
+              valve train with its rocker arms, followers and springs, the
+              timing belt and cam gears, and the intake and exhaust manifolds.
+              Every dimension came off a reference measurement and got
+              constrained with real geometric mates instead of being
+              eyeballed.
             </p>
             <p>
-              Mechanical motion was validated with a SolidWorks Motion Study
-              &mdash; the crankshaft actually drives the pistons and valve
-              train through the modeled constraints, not just a static
-              exploded view. Tolerancing wasn&apos;t applied given the
-              project timeline; the emphasis here is assembly complexity and
-              correct kinematic relationships between parts.
+              I checked the mechanical motion with a SolidWorks Motion Study,
+              so the crankshaft actually drives the pistons and the valve train
+              through the constraints I built rather than sitting in a static
+              exploded view. I did not get to tolerancing given how long the
+              project ran, so what this shows is the assembly complexity and
+              whether the parts move correctly against each other.
             </p>
           </div>
         </section>
       </Reveal>
 
-      {/* Power flow — interactive walkthrough */}
+      {/* Power flow, interactive walkthrough */}
       <Reveal>
         <section id="power-flow" className="mt-16">
           <SectionLabel n="02" title="How the power flows" Icon={Path} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            The assembly isn&apos;t a static shell &mdash; every rotating part
-            is constrained to the one before it. Step through the chain to see
-            what drives what.
+            The assembly is not a static shell. Every rotating part is
+            constrained to the one before it, so you can step through the chain
+            below and see what drives what.
           </p>
           <div className="mt-6">
             <PowerFlow />
@@ -208,8 +210,9 @@ export default function V6EnginePage() {
         <section id="views" className="mt-16">
           <SectionLabel n="03" title="Model views" Icon={Cube} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            The completed assembly from three angles &mdash; intake and
-            exhaust manifolds, timing belt, and both cylinder banks in place.
+            The finished assembly from three angles, with the intake and
+            exhaust manifolds, the timing belt and both cylinder banks all in
+            place.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {modelViews.map((v) => (
@@ -238,9 +241,9 @@ export default function V6EnginePage() {
         <section id="assembly" className="mt-16">
           <SectionLabel n="04" title="The assembly" Icon={Wrench} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            SolidWorks screenshots of the actual model, plus a dimensioned 2D
-            drawing and the full exploded-view BOM. The reference photo of
-            the real 6G72 is included for comparison, not as my own work.
+            SolidWorks screenshots of the model itself, along with a
+            dimensioned 2D drawing and the full exploded view BOM. The photo of
+            the real 6G72 is there for comparison and is not my own work.
           </p>
           <div className="mt-6">
             <Gallery images={gallery} />
@@ -253,15 +256,16 @@ export default function V6EnginePage() {
         <section id="motion" className="mt-16">
           <SectionLabel n="05" title="Motion study" Icon={ChartLineUp} />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Crankshaft rotation drives the pistons and, through the timing
-            belt and cam gears, the full valve train &mdash; validated as an
-            actual kinematic simulation, not a rendered animation.
+            Crankshaft rotation drives the pistons, and through the timing
+            belt and cam gears it drives the full valve train. This is an
+            actual kinematic simulation running off the constraints, not a
+            rendered animation.
           </p>
           <div className="mt-4 max-w-2xl">
             <VideoSlot
               src="/media/v6-engine/motion-study-0.75x.mp4"
               poster="/media/posters/motion-study.jpg"
-              label="SolidWorks Motion Study — slowed to 0.75× for clarity"
+              label="SolidWorks Motion Study, slowed to 0.75× so it is easier to follow"
             />
           </div>
         </section>
@@ -296,9 +300,8 @@ export default function V6EnginePage() {
         <section id="bom" className="mt-16">
           <SectionLabel n="07" title="Bill of materials" />
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            A partial view of the part list &mdash; enough to show the scale
-            of what has to mate correctly for the assembly to move as one
-            system.
+            Part of the list, which is enough to show how much has to mate
+            correctly before the assembly will move as one system.
           </p>
           <div className="mt-4 max-h-96 overflow-y-auto rounded-lg border border-border">
             <table className="w-full text-sm">
@@ -336,18 +339,18 @@ export default function V6EnginePage() {
           <SectionLabel n="08" title="What I'd build next" Icon={Lightbulb} />
           <div className="mt-6 max-w-2xl space-y-4 text-sm leading-relaxed text-muted">
             <p>
-              What this model proves is synchronized mechanical motion &mdash;
-              multiple axes of rotation driven from a single input, with
-              pulleys and gears enforcing the timing relationships between
+              What this model shows is synchronized mechanical motion, with
+              multiple axes of rotation all driven from a single input and
+              pulleys and gears holding the timing relationships between
               them.
             </p>
             <p>
-              The obvious next step is the part I deliberately left out: the
-              combustion system. Modeling the fuel path, injectors, and spark
-              timing would turn this from a kinematic assembly into something
-              that could actually be simulated as a running engine &mdash;
-              which is a meaningfully harder problem than geometry, and the one
-              I&apos;d want to take on next.
+              The obvious next step is the part I left out on purpose, which is
+              the combustion system. Modelling the fuel path, the injectors and
+              the spark timing would take this from a kinematic assembly to
+              something you could actually simulate as a running engine. That
+              is a harder problem than the geometry was, and it is the one I
+              would want to take on next.
             </p>
           </div>
         </section>
