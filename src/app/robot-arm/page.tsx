@@ -152,7 +152,7 @@ export default function RobotArmPage() {
           className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
         />
         <p className="font-mono text-xs uppercase tracking-widest text-accent">
-          Project 01 &middot; June to August 2026
+          Project 02 &middot; June to August 2026
         </p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
           5-DOF Autonomous Robotic Arm

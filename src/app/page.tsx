@@ -9,8 +9,21 @@ export const metadata: Metadata = {
 
 const projects = [
   {
-    href: "/robot-arm",
+    href: "/lox-manifold",
     tag: "Project 01",
+    title: "Vespula LOx Manifold CFD",
+    blurb:
+      "Steady RANS in STAR-CCM+ of how evenly one LOx manifold feeds 17 swirl elements. Every element lands within 2% of the average, checked against hand calcs.",
+    stats: ["σ = 0.92%", "1.72M cells"],
+    cover: "/media/lox-manifold/velocity-plane.png",
+    coverAlt:
+      "Velocity magnitude through the LOx manifold plenum, with the inlet jet at the centre and 17 swirl elements around it",
+    coverWidth: 1905,
+    coverHeight: 850,
+  },
+  {
+    href: "/robot-arm",
+    tag: "Project 02",
     title: "5-DOF Autonomous Robotic Arm",
     blurb:
       "SolidWorks into Simscape Multibody, OpenCV detection, and closed-loop servo control. 100% ground pick success on real hardware.",
@@ -23,7 +36,7 @@ const projects = [
   },
   {
     href: "/v6-engine",
-    tag: "Project 02",
+    tag: "Project 03",
     title: "Mitsubishi 6G72 V6 CAD Assembly",
     blurb:
       "A full V6 SOHC engine reverse engineered in SolidWorks from part drawings. Pistons, crankshaft, camshaft, and a large assembly that all mates together.",
@@ -36,7 +49,7 @@ const projects = [
   },
   {
     href: "/fusion-paper",
-    tag: "Project 03",
+    tag: "Project 04",
     title: "Nuclear Fusion Research Paper",
     blurb:
       "A quantitative look at magnetic and inertial confinement fusion, written with Ryan Kang.",

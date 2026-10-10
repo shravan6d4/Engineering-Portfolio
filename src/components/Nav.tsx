@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
+  { href: "/lox-manifold", label: "LOx Manifold" },
   { href: "/robot-arm", label: "Robot Arm" },
   { href: "/v6-engine", label: "V6 Engine" },
   { href: "/fusion-paper", label: "Fusion Paper" },

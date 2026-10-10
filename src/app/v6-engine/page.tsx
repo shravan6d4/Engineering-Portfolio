@@ -103,7 +103,7 @@ export default function V6EnginePage() {
             className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
           />
           <p className="font-mono text-xs uppercase tracking-widest text-accent">
-            Project 02 &middot; January to May 2026
+            Project 03 &middot; January to May 2026
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
             Mitsubishi 6G72 V6 CAD Assembly

@@ -1,13 +1,15 @@
 # Engineering Portfolio — Shravan Kumar
 
 Source for **[shravan-kumar.com](https://shravan-kumar.com)**, an engineering
-portfolio covering three projects: a vision-guided 5-DOF robotic arm, a
-reverse-engineered V6 engine CAD assembly, and a nuclear fusion research paper.
+portfolio covering four projects: a vision-guided 5-DOF robotic arm, a
+reverse-engineered V6 engine CAD assembly, a nuclear fusion research paper, and
+a CFD study of a rocket engine LOx manifold.
 
 ## Projects on the site
 
 | Project | Summary |
 | --- | --- |
+| **Vespula LOx Manifold CFD** | Steady RANS study in STAR-CCM+ of how evenly one LOx manifold feeds 17 swirl injector elements, with convergence checks, hand calcs, and a design recommendation drawn from the flow field. |
 | **5-DOF Autonomous Robotic Arm** | SolidWorks → Simscape Multibody → OpenCV → closed-loop servo control, running on real hardware. Includes the per-step signal flow, the two-pose depth method that lets it pick at any height, and the failure narrative behind a 73.1 mm → 6.0 mm kinematic accuracy fix. |
 | **Mitsubishi 6G72 V6 — CAD Assembly** | A fully mated, motion-validated V6 SOHC engine reverse-engineered from part drawings, with an interactive walkthrough of how rotation propagates from pistons to valve train. |
 | **Nuclear Fusion — A Quantitative Survey** | Co-authored research paper on magnetic and inertial confinement fusion. |

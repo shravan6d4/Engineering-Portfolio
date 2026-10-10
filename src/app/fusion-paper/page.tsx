@@ -55,7 +55,7 @@ export default function FusionPaperPage() {
         <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-center">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              Project 03 &middot; Written with Ryan Kang
+              Project 04 &middot; Written with Ryan Kang
             </p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">
               Nuclear Fusion,{" "}
