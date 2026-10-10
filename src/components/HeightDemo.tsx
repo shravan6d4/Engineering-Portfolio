@@ -1,5 +1,8 @@
 import VideoSlot from "./VideoSlot";
 
+// The clips are encoded at 2.5x, so this brings playback to 9x real time.
+const PLAYBACK_RATE = 9 / 2.5;
+
 type HeightDemoProps = {
   heightLabel: string;
   note?: string;
@@ -32,7 +35,7 @@ export default function HeightDemo({
         <div className="flex items-center gap-2">
           {sped && (
             <span className="rounded border border-border bg-surface px-2 py-0.5 font-mono text-[11px] text-muted">
-              Playback: 2.5&times; speed
+              Playback: 9&times; speed
             </span>
           )}
         </div>
@@ -44,11 +47,13 @@ export default function HeightDemo({
             src={physicalSrc}
             poster={physicalPoster}
             label="Physical arm (iPhone)"
+            playbackRate={PLAYBACK_RATE}
           />
           <VideoSlot
             src={secondarySrc}
             poster={secondaryPoster}
             label={secondaryLabel}
+            playbackRate={PLAYBACK_RATE}
           />
         </div>
       ) : (
@@ -57,6 +62,7 @@ export default function HeightDemo({
             src={physicalSrc}
             poster={physicalPoster}
             label="Physical arm (iPhone)"
+            playbackRate={PLAYBACK_RATE}
           />
         </div>
       )}

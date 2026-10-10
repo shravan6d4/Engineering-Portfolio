@@ -7,9 +7,16 @@ type VideoSlotProps = {
   src?: string;
   poster?: string;
   label: string;
+  // Multiplier applied on top of whatever speed is baked into the file.
+  playbackRate?: number;
 };
 
-export default function VideoSlot({ src, poster, label }: VideoSlotProps) {
+export default function VideoSlot({
+  src,
+  poster,
+  label,
+  playbackRate = 1,
+}: VideoSlotProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activated, setActivated] = useState(false);
 
@@ -42,7 +49,10 @@ export default function VideoSlot({ src, poster, label }: VideoSlotProps) {
     // throttled (background tab) and would leave the play button dead.
     const v = videoRef.current;
     if (v) {
+      // load() resets playbackRate to the default, so set both.
+      v.defaultPlaybackRate = playbackRate;
       v.load();
+      v.playbackRate = playbackRate;
       void v.play().catch(() => {});
     }
     setActivated(true);

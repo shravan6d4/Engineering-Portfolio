@@ -227,7 +227,7 @@ export default function RobotArmPage() {
             The descent moves in slow jogs on purpose. It gave us a safety
             margin against an encoder seam runaway, and the camera needed a
             close to stationary frame for OpenCV to resolve the brick without
-            motion blur. Clips are sped up 2.5&times; for viewing.
+            motion blur. Clips are sped up 9&times; for viewing.
           </p>
         </section>
       </Reveal>
@@ -518,7 +518,8 @@ export default function RobotArmPage() {
             <VideoSlot
               src="/media/robot-arm/simscape-demo.mp4"
               poster="/media/posters/simscape.jpg"
-              label="Simscape Multibody, early IK validation"
+              label="Simscape Multibody, early IK validation, 9× speed"
+              playbackRate={9}
             />
           </div>
           <div className="mt-4">
