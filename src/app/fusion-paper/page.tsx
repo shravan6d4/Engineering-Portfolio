@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { FilePdf, ArrowSquareOut, Sun, Atom, Lightning } from "@phosphor-icons/react/dist/ssr";
 import StatCallout from "@/components/StatCallout";
+import Glance from "@/components/Glance";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -15,25 +16,44 @@ const sections = [
     n: "01",
     title: "Theory",
     Icon: Sun,
-    body: "We derive the energy released by hydrogen to helium fusion straight from the mass defect and E=mc², then work through why fusion is hard in the first place. That comes down to the Coulomb barrier, and how the Sun gets around it with pressure and quantum tunneling. On Earth it means picking the right fuel, which we get to through fusion cross-sections, and then hitting the temperature and confinement time that Lawson's Criterion asks for.",
+    body: "We derive the energy released by hydrogen to helium fusion straight from the mass defect and E=mc², then work through why fusion is hard in the first place.",
   },
   {
     n: "02",
     title: "Engineering methods",
     Icon: Atom,
-    body: "This covers the two approaches real reactors use. Magnetic confinement gets tokamak geometry, gyrocenter and particle motion, and the three heating methods ITER runs. Laser inertial confinement gets the Shiva and Nova systems at Lawrence Livermore. We tie each one back to the side of Lawson's Criterion it is solving for, either long confinement at low pressure or extreme pressure for nanoseconds.",
+    body: "This covers the two approaches real reactors use.",
   },
   {
     n: "03",
     title: "Modern advancements",
     Icon: Lightning,
-    body: "Tearing instabilities and magnetic islands, including how Princeton's AI based predictive control forecasts a tearing instability up to 300ms before it happens instead of reacting after the fact. We also get into liquid lithium wall coatings as an alternative to solid tungsten and beryllium liners.",
+    body: "Tearing instabilities and magnetic islands, including how Princeton's AI based predictive control forecasts a tearing instability up to 300ms before it happens instead of reacting after the fact.",
   },
   {
     n: "04",
     title: "Looking to the future",
     Icon: Lightning,
-    body: "An honest look at what is still unsolved. Reactors are barely past net energy gain, tritium fuel is not naturally abundant, and funding is getting cut right now. We read all of that as an engineering and economics problem and not only a physics one.",
+    body: "An honest look at what is still unsolved.",
+  },
+];
+
+const glance = [
+  {
+    label: "Who",
+    text: "I wrote this with Ryan Kang and we split it evenly across the theory and the engineering methods.",
+  },
+  {
+    label: "Why",
+    text: "It is not related to my other projects, and it is here as a writing and research sample instead of a propulsion piece.",
+  },
+  {
+    label: "How",
+    text: "The paper works through the real derivations instead of only describing the concepts, and it is upfront about where it stops.",
+  },
+  {
+    label: "Open",
+    text: "One derivation in the theory section was past what we could do from first principles, and we say that directly in the paper instead of hand waving past it.",
   },
 ];
 
@@ -117,20 +137,7 @@ export default function FusionPaperPage() {
           )}
         </div>
 
-        <Reveal>
-          <section className="mt-16 max-w-2xl">
-            <p className="text-sm leading-relaxed text-muted">
-              I wrote this with Ryan Kang and we split it evenly across the
-              theory and the engineering methods. It is not related to my other
-              projects, and it is here as a writing and research sample instead
-              of a propulsion piece. The paper works through the real
-              derivations instead of only describing the concepts, and it is
-              upfront about where it stops. One derivation in the theory section
-              was past what we could do from first principles, and we say that
-              directly in the paper instead of hand waving past it.
-            </p>
-          </section>
-        </Reveal>
+        <Glance items={glance} />
 
         {/* The two confinement approaches, illustrated */}
         <Reveal>
@@ -150,7 +157,6 @@ export default function FusionPaperPage() {
               <ApproachCard
                 label="Magnetic confinement"
                 headline="Hold it for a long time, at low pressure"
-                body="A tokamak's toroidal and poloidal fields combine into a helical field that keeps the plasma off the walls, and reactions can run for minutes."
                 accent="#38bdf8"
                 img="/media/fusion/tokamak-fields.png"
                 imgAlt="Diagram of toroidal and poloidal magnetic fields in a tokamak"
@@ -161,7 +167,6 @@ export default function FusionPaperPage() {
               <ApproachCard
                 label="Inertial confinement"
                 headline="Hold it for nanoseconds, at extreme pressure"
-                body="High powered lasers implode a fuel pellet so fast that the nuclei fuse before they can move apart, and the shell's own inertia is what does the confining."
                 accent="#ff7a18"
                 img="/media/fusion/icf-diagram.svg"
                 imgAlt="Diagram of the stages of inertial confinement fusion"
@@ -251,7 +256,6 @@ export default function FusionPaperPage() {
 function ApproachCard({
   label,
   headline,
-  body,
   accent,
   img,
   imgAlt,
@@ -261,7 +265,6 @@ function ApproachCard({
 }: {
   label: string;
   headline: string;
-  body: string;
   accent: string;
   img: string;
   imgAlt: string;
@@ -284,8 +287,7 @@ function ApproachCard({
           {label}
         </p>
         <h3 className="mt-2 font-medium text-foreground">{headline}</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{body}</p>
-        <div className="mt-4 flex items-center justify-center rounded-lg border border-border bg-white/[0.03] p-3">
+        <div className="mt-4 flex flex-1 items-center justify-center rounded-lg border border-border bg-white/[0.03] p-3">
           <Image
             src={img}
             alt={imgAlt}
